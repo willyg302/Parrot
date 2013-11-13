@@ -19,6 +19,19 @@ Setup
 
    Obviously this requires Python (2.7 is used by this project). If you already have `pip` installed, you can skip the first two commands.
 
+Authorization
+-------------
+
+Collecting data from the various social media sites requires authorization in the form of __OAuth tokens__. Parrot specifies the required tokens in a file called `tokens.txt` in the application root directory. This file has the following format:
+
+```json
+{
+	"fb_token": "[FACEBOOK TOKEN HERE]"
+}
+```
+
+If you do not include this file, Parrot will not run.
+
 Credits
 -------
 
