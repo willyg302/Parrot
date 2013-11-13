@@ -22,15 +22,35 @@ Setup
 Authorization
 -------------
 
-Collecting data from the various social media sites requires authorization in the form of __OAuth tokens__. Parrot specifies the required tokens in a file called `tokens.txt` in the application root directory. This file has the following format:
+Collecting data from the various social media sites requires authorization in the form of __OAuth tokens__. Parrot specifies the required tokens in a file called `tokens.json` in the application root directory. This file has the following format:
 
 ```json
 {
-	"fb_token": "[FACEBOOK TOKEN HERE]"
+	"debug": {
+		"fb_token": "[FACEBOOK TOKEN FOR TESTING]",
+		"tw_app_key": "[TWITTER APP KEY FOR TESTING]",
+		"tw_app_secret": "[TWITTER APP SECRET FOR TESTING]",
+		"tw_oauth_token": "[TWITTER CLIENT OAUTH TOKEN FOR TESTING]",
+		"tw_oauth_secret": "[TWITTER CLIENT OAUTH SECRET FOR TESTING]"
+	},
+	"production": {
+		"fb_token": "[FACEBOOK TOKEN FOR PRODUCTION]",
+		"tw_app_key": "[TWITTER APP KEY FOR PRODUCTION]",
+		"tw_app_secret": "[TWITTER APP SECRET FOR PRODUCTION]",
+		"tw_oauth_token": "[TWITTER CLIENT OAUTH TOKEN FOR PRODUCTION]",
+		"tw_oauth_secret": "[TWITTER CLIENT OAUTH SECRET FOR PRODUCTION]"
+	}
 }
 ```
 
-If you do not include this file, Parrot will not run.
+If you do not include this file, Parrot will not run. You may choose to omit certain tokens if you do not need them, or even the entire `debug` block if you never plan to run Parrot in debug mode.
+
+Usage (CLI)
+-----------
+
+* `python parrot.py` to run Parrot (with all defaults, production mode)
+* `python parrot.py --debug` to run Parrot in debug mode (also accepts `-d` shortcode)
+* `python parrot.py --help` for a list of command line options
 
 Credits
 -------
