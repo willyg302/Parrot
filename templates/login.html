@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Login</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="author" content="William Gaul">
+	<link href="{{ static_url("css/bootstrap.min.css") }}" rel="stylesheet">
+	<link href="{{ static_url("css/login.css") }}" rel="stylesheet">
+	<link rel="shortcut icon" href="{{ static_url("img/favicon.ico") }}">
+</head>
+<body>
+	<div class="container">
+		<form action="/login" class="form-signin" method="post">
+			<img src="{{ static_url("img/logo.svg") }}" />
+			<input type="text" class="form-control" id="username" name="username" placeholder="Username" required="" autofocus="">
+			<input type="password" class="form-control" id="password" name="password" placeholder="Password" required="">
+			<button class="btn btn-lg btn-primary btn-block" type="submit">Sign In</button>
+		</form>
+	</div>
+	<script src="{{ static_url("js/bootstrap.min.js") }}"></script>
+</body>
+</html>

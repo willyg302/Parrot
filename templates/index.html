@@ -1,0 +1,143 @@
+{% autoescape None %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Parrot</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<link href="http://fonts.googleapis.com/css?family=Open+Sans:300,600|Open+Sans+Condensed:300,600&amp;v2" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" href="{{ static_url("css/app.css") }}" type="text/css" media="all">
+	<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="shortcut icon" href="{{ static_url("img/favicon.ico") }}">
+</head>
+<body class="index">
+	<div id="wrap">
+		<header>
+			<section>
+				<div>
+					<a id="logo" href="/"><img src="{{ static_url("img/logo.svg") }}" width="572" height="102"></a>
+					<nav>
+						<a href="/help">Help</a>
+						<a href="/profile">{{ username }}</a>
+						<a href="/logout">Log Out</a>
+						<span class="loading"></span>
+					</nav>
+				</div>
+			</section>
+		</header>
+		<div id="torso">
+			<div id="content">
+				<p class="intro">Type into the field below!</p>
+				<form action="/search" method="get">
+					<input id="search" type="text" placeholder="What do?" name="terms">
+				</form>
+				<div class="highlights">
+					<div class="section trending">
+						<h2><a href="/browse/trending">Current <i class="fa fa-clock-o"></i></a></h2>
+						<p>Jobs that are still in progress</p>
+						<ul>
+							<li>
+								<a href="#">Fake Job 1</a>
+							</li>
+							<li>
+								<a href="#">Fake Job 2</a>
+							</li>
+							<li>
+								<a href="#">Fake Job 3</a>
+								<span class="versions only" title="Streaming job">S</span>
+							</li>
+							<li>
+								<a href="#">Fake Job 4</a>
+							</li>
+							<li>
+								<a href="#">Fake Job 5</a>
+							</li>
+							<li>
+								<a href="#">Fake Job 6</a>
+							</li>
+							<li>
+								<a href="#">Fake Job 7</a>
+							</li>
+							<li>
+								<a href="#">Fake Job 8</a>
+							</li>
+							<li>
+								<a href="#">Fake Job 9</a>
+							</li>
+							<li>
+								<a href="#">Fake Job 10</a>
+							</li>
+						</ul>
+					</div>
+					<div class="section new">
+						<h2><a href="/browse/new">Historical <i class="fa fa-check"></i></a></h2>
+						<p>Jobs that have finished already</p>
+						<ul>
+							<li>
+								<a href="#">Fake Job 1</a>
+							</li>
+							<li>
+								<a href="#">Fake Job 2</a>
+							</li>
+							<li>
+								<a href="#">Fake Job 3</a>
+								<span class="versions only" title="Streaming job">S</span>
+							</li>
+							<li>
+								<a href="#">Fake Job 4</a>
+							</li>
+							<li>
+								<a href="#">Fake Job 5</a>
+							</li>
+							<li>
+								<a href="#">Fake Job 6</a>
+							</li>
+							<li>
+								<a href="#">Fake Job 7</a>
+							</li>
+							<li>
+								<a href="#">Fake Job 8</a>
+							</li>
+							<li>
+								<a href="#">Fake Job 9</a>
+							</li>
+							<li>
+								<a href="#">Fake Job 10</a>
+							</li>
+						</ul>
+					</div>
+					<div class="section popular">
+						<h2><a href="/browse/popular">Statistics <i class="fa fa-leaf"></i></a></h2>
+						<p>Info about Parrot's inner workings</p>
+						<ul>
+							<li>
+								<a href="#">Fake Job 10</a>
+								<span class="package_count">115</span>
+							</li>
+							<li>
+								<a href="#">Rate Limits</a>
+							</li>
+						</ul>
+					</div>
+					<div class="section labels">
+						<h2><a href="/browse/labels">Resources <i class="fa fa-external-link-square"></i></a></h2>
+						<p>External links to important things</p>
+						<ul>
+							<li>
+								<a href="#">Fake Job 10</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<footer>
+		<section>
+			Copyright &copy; <script>document.write(new Date().getFullYear());</script>
+			<a id="wbond" href="http://manoa.hawaii.edu/hichi/index.html">HICHI</a>
+		</section>
+	</footer>
+	<!--<script src="/js/app.js"></script>-->
+</body>
+</html>

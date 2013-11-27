@@ -1,2 +1,3 @@
-tokens.json
-Parrot-log.log
+*.py[cod]
+tornado/
+tokens.py
