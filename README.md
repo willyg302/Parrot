@@ -17,24 +17,13 @@ Setup
    $ python setup/get-pip.py
    ```
 
-3. Create a virtual environment for Parrot
+3. Run the Parrot setup script (this will install `virtualenv` if necessary, set up a virtual environment for Parrot called `tornado`, and install all necessary packages, a list of which can be found in `requirements.txt` once the setup has finished)
 
    ```bash
-   $ pip install virtualenv
-   $ virtualenv tornado
+   $ python setup-parrot.py
    ```
 
-4. Install the necessary packages
-
-   ```bash
-   $ tornado/bin/pip install -r requirements.txt
-   ```
-
-   Or on Windows:
-
-   ```bash
-   $ tornado\Scripts\pip install -r requirements.txt
-   ```
+> **Note**: You should not try to install dependencies directly from the `requirements.txt` because some packages require compiling and that absolutely sucks on Windows. Use `setup-parrot.py`, it's painless!
 
 And that's it! ...Okay not really. The next step is to set up proper authorization for Parrot (OAuth, secret keys, cookies, and all that good stuff).
 
