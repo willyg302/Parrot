@@ -6,13 +6,13 @@ import tornado.web
 
 import hashlib
 import signal, time
+import logging
 
 import parrot_settings
 import tokens
 
 from tornado import gen
 from tornado.options import define, options, parse_command_line
-from tornado.log import app_log
 
 
 # Tornado settings (we default to run on port 8888)
@@ -92,7 +92,7 @@ class LoginHandler(BaseHandler):
 	def post(self):
 		username = self.get_argument('username', '')
 		password = self.get_argument('password', '')
-		app_log.info("User {0} logging in with password {1}".format(username, password))
+		logging.info("User {0} logging in with password {1}".format(username, password))
 		if self.check_permission(username, password):
 			self.set_current_user(username)
 			self.redirect(self.get_argument('next', u'/'))

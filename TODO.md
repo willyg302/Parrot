@@ -1,0 +1,4 @@
+- [ ] Add `pip install twython` to `setup-parrot.py`
+- [ ] Configure logging to file as well as console
+- [ ] Configure automatic MongoDB startup
+- [ ] `motor` integration

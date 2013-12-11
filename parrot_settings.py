@@ -12,5 +12,5 @@ MAX_WAIT_SECONDS_BEFORE_SHUTDOWN = 3
 
 # Hard-coded dictionary of users, we won't have that many so this is okay
 USER_DICT = dict(
-	admin='ac4ba088bb3b2ec03086772161390082a6e528ef5ccdc065e691a8b823a71305',
+	admin='4884ef6785bcac3c8bc17ee3b16bea2009009ed136bf82f3762acebfca4b5b3e',
 )
