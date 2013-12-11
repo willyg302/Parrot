@@ -5,6 +5,7 @@ import tornado.ioloop
 import tornado.web
 
 import hashlib
+import signal, time
 
 import parrot_settings
 import tokens
@@ -16,6 +17,26 @@ from tornado.log import app_log
 
 # Tornado settings (we default to run on port 8888)
 define('port', default=8888, help="The port to run Parrot on", type=int)
+
+
+# Handle signals from the shell (or kill -9's)
+def sig_handler(sig, frame):
+	tornado.ioloop.IOLoop.instance().add_callback(shutdown)
+
+# Graceful shutdown of the server
+def shutdown():
+	http_server.stop()
+	io_loop = tornado.ioloop.IOLoop.instance()
+	deadline = time.time() + parrot_settings.MAX_WAIT_SECONDS_BEFORE_SHUTDOWN
+
+	def stop_loop():
+		now = time.time()
+		if now < deadline and (io_loop._callbacks or io_loop._timeouts):
+			io_loop.add_timeout(now + 1, stop_loop)
+		else:
+			io_loop.stop()
+
+	stop_loop()
 
 
 class Application(tornado.web.Application):
@@ -96,8 +117,15 @@ class LogoutHandler(BaseHandler):
 # Logic if the app is being invoked directly
 def main():
 	parse_command_line()
+
+	global http_server
+
 	http_server = tornado.httpserver.HTTPServer(Application())
 	http_server.listen(options.port)
+
+	signal.signal(signal.SIGTERM, sig_handler)
+	signal.signal(signal.SIGINT, sig_handler)
+
 	tornado.ioloop.IOLoop.instance().start()
 
 

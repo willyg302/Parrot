@@ -8,7 +8,9 @@ DEBUG = True
 STATIC_PATH = os.path.join(_dirname, 'static')
 TEMPLATE_PATH = os.path.join(_dirname, 'templates')
 
+MAX_WAIT_SECONDS_BEFORE_SHUTDOWN = 3
+
 # Hard-coded dictionary of users, we won't have that many so this is okay
 USER_DICT = dict(
-	admin='23f0e94a2f81812f393ad95225b905ed9e9ee1a0a18b3ceacbcb4144e726b8f2',
+	admin='ac4ba088bb3b2ec03086772161390082a6e528ef5ccdc065e691a8b823a71305',
 )
