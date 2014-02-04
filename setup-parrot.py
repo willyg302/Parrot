@@ -6,6 +6,13 @@ DIRNAME = os.path.abspath(os.path.dirname(__file__))
 ENV = 'tornado'
 REQUIREMENTS = 'requirements.txt'
 
+script_dir = '\\Scripts\\' if platform.system() == 'Windows' else '/bin/'
+
+
+# Invokes a shell command relative to our virtual environment
+def call_virtual(command):
+	call('{}{}{}'.format(ENV, script_dir, command), shell=True)
+
 
 # Check if virtualenv is installed, and install if not
 def check_virtualenv():
@@ -26,10 +33,10 @@ def check_env():
 # Install all necessary requirements to the virtual environment
 def install_requirements():
 	print('== 3. Installing requirements ==')
-	script_dir = '\\Scripts\\' if platform.system() == 'Windows' else '/bin/'
-	call('{}{}easy_install greenlet'.format(ENV, script_dir), shell=True)
-	call('{}{}pip install motor'.format(ENV, script_dir), shell=True)
-	call('{}{}pip freeze > {}'.format(ENV, script_dir, REQUIREMENTS), shell=True)
+	call_virtual('easy_install greenlet')
+	call_virtual('pip install motor')
+	call_virtual('pip install pattern')
+	call_virtual('pip freeze > {}'.format(REQUIREMENTS))
 
 
 def main():
