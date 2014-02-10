@@ -14,9 +14,14 @@ import tokens
 from tornado import gen
 from tornado.options import define, options, parse_command_line
 
+from kernel import Kernel
+
 
 # Tornado settings (we default to run on port 8888)
 define('port', default=8888, help="The port to run Parrot on", type=int)
+
+
+kernel = Kernel()
 
 
 # Handle signals from the shell (or kill -9's)
@@ -46,6 +51,7 @@ class Application(tornado.web.Application):
 			(r'/', MainHandler),
 			(r'/login', LoginHandler),
 			(r'/logout', LogoutHandler),
+			(r'/search', InputHandler),
 		]
 		settings = dict(
 			template_path=parrot_settings.TEMPLATE_PATH,
@@ -72,6 +78,15 @@ class MainHandler(BaseHandler):
 	def get(self):
 		username = tornado.escape.xhtml_escape(self.current_user)
 		self.render('index.html', username=username)
+
+
+class InputHandler(BaseHandler):
+
+	@tornado.web.authenticated
+	def post(self):
+		string = self.get_argument('terms', '')
+		response = kernel.handle_input(string)
+		self.redirect(u"/?ret=" + response)
 
 
 class LoginHandler(BaseHandler):
