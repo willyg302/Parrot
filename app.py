@@ -84,9 +84,9 @@ class InputHandler(BaseHandler):
 
 	@tornado.web.authenticated
 	def post(self):
-		string = self.get_argument('terms', '')
+		string = self.get_argument('data', '')
 		response = kernel.handle_input(string)
-		self.redirect(u"/?ret=" + response)
+		self.write(response)
 
 
 class LoginHandler(BaseHandler):
