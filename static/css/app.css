@@ -66,13 +66,6 @@ nav {
 	font-size: 16px;
 }
 
-footer {
-	clear: both;
-	margin-top: 30px;
-	/*padding-bottom: 10px;
-	padding-top: 10px;*/
-}
-
 p {
 	margin-bottom: 20px;
 	margin-top: 0;
@@ -134,8 +127,6 @@ h5 {
 }
 
 kbd,tt,code {
-	-moz-border-radius: 2px;
-	-webkit-border-radius: 2px;
 	border-radius: 2px;
 	background-color: #f3f3f3;
 	font-family: "Consolas","Driod Sans Mono",monospace;
@@ -149,8 +140,6 @@ kbd em,tt em,code em {
 }
 
 span.menu {
-	-moz-border-radius: 2px;
-	-webkit-border-radius: 2px;
 	border-radius: 2px;
 	background-color: #f3f3f3;
 	padding: 1px 4px;
@@ -163,8 +152,6 @@ span.menu em {
 }
 
 p.code {
-	-moz-border-radius: 2px;
-	-webkit-border-radius: 2px;
 	border-radius: 2px;
 	background-color: #f3f3f3;
 	padding: 8px 10px;
@@ -232,8 +219,6 @@ label {
 }
 
 pre {
-	-moz-border-radius: 2px;
-	-webkit-border-radius: 2px;
 	border-radius: 2px;
 	background-color: #f3f3f3;
 	overflow: auto;
@@ -343,9 +328,6 @@ div#torso {
 }
 
 footer {
-	-moz-box-shadow: inset 0 6px 12px -8px #333;
-	-o-box-shadow: inset 0 6px 12px -8px #333;
-	-webkit-box-shadow: inset 0 6px 12px -8px #333;
 	box-shadow: inset 0 6px 12px -8px #333;
 	background-color: #555e69;
 	color: #fff;
@@ -560,8 +542,6 @@ body.index input#search {
 	-moz-box-sizing: border-box;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
-	-moz-border-radius: 4px;
-	-webkit-border-radius: 4px;
 	border-radius: 4px;
 	background-color: #f9f9f9;
 	border: 1px solid #eee;
@@ -580,9 +560,6 @@ body.index input#search {
 }
 
 body.index input#search:focus {
-	-moz-box-shadow: 0 0 5px 0 #aabf7c;
-	-o-box-shadow: 0 0 5px 0 #aabf7c;
-	-webkit-box-shadow: 0 0 5px 0 #aabf7c;
 	box-shadow: 0 0 5px 0 #aabf7c;
 	border-color: #aabf7c;
 }
@@ -696,8 +673,6 @@ span.platforms.also-after,ul.packages li span.platforms.also-after,body.package 
 }
 
 span.versions,span.platforms {
-	-moz-border-radius: 2px;
-	-webkit-border-radius: 2px;
 	border-radius: 2px;
 	font-size: .85em;
 	padding: 1px 4px;
@@ -775,5 +750,5 @@ footer {
 	position: relative;
 	margin-top: -70px;
 	height: 70px;
-	clear:both;
+	clear: both;
 }
