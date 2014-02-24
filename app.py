@@ -1,19 +1,13 @@
-import tornado.auth
-import tornado.escape
-import tornado.httpserver
-import tornado.ioloop
-import tornado.web
-
 import hashlib
-import signal, time
+import signal
+import time
 import logging
+
+from tornado import escape, httpserver, ioloop, web
+from tornado.options import define, options, parse_command_line
 
 import parrot_settings
 import tokens
-
-from tornado import gen
-from tornado.options import define, options, parse_command_line
-
 from kernel import Kernel
 
 
@@ -26,12 +20,12 @@ kernel = Kernel()
 
 # Handle signals from the shell (or kill -9's)
 def sig_handler(sig, frame):
-	tornado.ioloop.IOLoop.instance().add_callback(shutdown)
+	ioloop.IOLoop.instance().add_callback(shutdown)
 
 # Graceful shutdown of the server
 def shutdown():
 	http_server.stop()
-	io_loop = tornado.ioloop.IOLoop.instance()
+	io_loop = ioloop.IOLoop.instance()
 	deadline = time.time() + parrot_settings.MAX_WAIT_SECONDS_BEFORE_SHUTDOWN
 
 	def stop_loop():
@@ -44,7 +38,7 @@ def shutdown():
 	stop_loop()
 
 
-class Application(tornado.web.Application):
+class Application(web.Application):
 
 	def __init__(self):
 		handlers = [
@@ -60,10 +54,10 @@ class Application(tornado.web.Application):
 			cookie_secret=tokens.COOKIE_SECRET,
 			login_url='/login',
 		)
-		tornado.web.Application.__init__(self, handlers, **settings)
+		web.Application.__init__(self, handlers, **settings)
 
 
-class BaseHandler(tornado.web.RequestHandler):
+class BaseHandler(web.RequestHandler):
 
 	def get_current_user(self):
 		return self.get_secure_cookie('parrot_user')
@@ -74,9 +68,9 @@ class BaseHandler(tornado.web.RequestHandler):
 
 class MainHandler(BaseHandler):
 
-	@tornado.web.authenticated
+	@web.authenticated
 	def get(self):
-		username = tornado.escape.xhtml_escape(self.current_user)
+		username = escape.xhtml_escape(self.current_user)
 		current = []
 		historical = []
 		self.render('index.html', username=username, current=current, historical=historical)
@@ -84,7 +78,7 @@ class MainHandler(BaseHandler):
 
 class InputHandler(BaseHandler):
 
-	@tornado.web.authenticated
+	@web.authenticated
 	def post(self):
 		string = self.get_argument('data', '')
 		response = kernel.handle_input(string)
@@ -114,7 +108,7 @@ class LoginHandler(BaseHandler):
 			self.set_current_user(username)
 			self.redirect(self.get_argument('next', u'/'))
 		else:
-			error_msg = u"?error=" + tornado.escape.url_escape("Login incorrect")
+			error_msg = u"?error=" + escape.url_escape("Login incorrect")
 			self.redirect(u"/login" + error_msg)
 
 	def set_current_user(self, user):
@@ -137,13 +131,13 @@ def main():
 
 	global http_server
 
-	http_server = tornado.httpserver.HTTPServer(Application())
+	http_server = httpserver.HTTPServer(Application())
 	http_server.listen(options.port)
 
 	signal.signal(signal.SIGTERM, sig_handler)
 	signal.signal(signal.SIGINT, sig_handler)
 
-	tornado.ioloop.IOLoop.instance().start()
+	ioloop.IOLoop.instance().start()
 
 
 if __name__ == "__main__":
