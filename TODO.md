@@ -1,4 +1,5 @@
-- [ ] Add `pip install twython` to `setup-parrot.py`
-- [ ] Configure logging to file as well as console
-- [ ] Configure automatic MongoDB startup
-- [ ] `motor` integration
+Besides everything marked `@TODO` in any source file. **Note**: completed tasks are marked with a ✔.
+
+- ☐ Configure logging to file as well as console
+- ☐ Configure automatic MongoDB startup
+- ☐ `motor` integration
