@@ -1,7 +1,6 @@
 import hashlib
 import signal
 import time
-import logging
 
 from tornado import escape, httpserver, ioloop, web
 from tornado.options import define, options, parse_command_line
@@ -9,6 +8,7 @@ from tornado.options import define, options, parse_command_line
 import parrot_settings
 import tokens
 from kernel import Kernel
+from log import parrot_log
 
 
 # Tornado settings (we default to run on port 8888)
@@ -112,7 +112,7 @@ class LoginHandler(BaseHandler):
 	def post(self):
 		username = self.get_argument('username', '')
 		password = self.get_argument('password', '')
-		logging.info("User {0} logging in with password {1}".format(username, password))
+		parrot_log.info("User {0} logging in with password {1}".format(username, password))
 		if self.check_permission(username, password):
 			self.set_current_user(username)
 			self.redirect(self.get_argument('next', u'/'))
@@ -136,6 +136,7 @@ class LogoutHandler(BaseHandler):
 
 # Logic if the app is being invoked directly
 def main():
+	#options['log_file_prefix'].set('logs/parrot1.log')  # Does not work
 	parse_command_line()
 
 	global http_server

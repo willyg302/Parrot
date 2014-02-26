@@ -7,6 +7,7 @@ _dirname = os.path.dirname(__file__)
 DEBUG = True
 STATIC_PATH = os.path.join(_dirname, 'static')
 TEMPLATE_PATH = os.path.join(_dirname, 'templates')
+LOG_PATH = os.path.join(_dirname, 'logs')
 
 MAX_WAIT_SECONDS_BEFORE_SHUTDOWN = 3
 
