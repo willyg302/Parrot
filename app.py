@@ -46,6 +46,7 @@ class Application(web.Application):
 			(r'/login', LoginHandler),
 			(r'/logout', LogoutHandler),
 			(r'/search', InputHandler),
+			(r'/help', HelpHandler),
 		]
 		settings = dict(
 			template_path=parrot_settings.TEMPLATE_PATH,
@@ -73,7 +74,15 @@ class MainHandler(BaseHandler):
 		username = escape.xhtml_escape(self.current_user)
 		current = []
 		historical = []
-		self.render('index.html', username=username, current=current, historical=historical)
+		self.render('index.html', username=username, current=current, historical=historical, help=False)
+
+
+class HelpHandler(BaseHandler):
+
+	@web.authenticated
+	def get(self):
+		username = escape.xhtml_escape(self.current_user)
+		self.render('help.html', username=username, help=True)
 
 
 class InputHandler(BaseHandler):

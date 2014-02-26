@@ -1,0 +1,37 @@
+{% autoescape None %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>{% block title %}Parrot{% end %}</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="author" content="William Gaul">
+	<link href="{{ static_url("css/app.css") }}" rel="stylesheet">
+	<!--<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">-->
+	<link rel="shortcut icon" href="{{ static_url("img/favicon.ico") }}">
+</head>
+<body>
+	<div id="wrap">
+		<header>
+			<a id="icon" href="/"><img src="{{ static_url("img/parrot-head.svg") }}" width="51" height="51"></a>
+			<a id="logo" href="/"><img src="{{ static_url("img/logo.svg") }}" width="286" height="51"></a>
+			<nav>
+				<a href="/help" {% if help %}class="active"{% end %}>Help</a>
+				<a href="/profile">{{ username }}</a>
+				<a href="/logout">Log Out</a>
+			</nav>
+		</header>
+		<div id="torso">
+			{% block content %}{% end %}
+		</div>
+	</div>
+	<footer>
+		<section>
+			Copyright &copy; <script>document.write(new Date().getFullYear());</script>
+			<a id="hichi" href="http://manoa.hawaii.edu/hichi/index.html">HICHI</a>
+		</section>
+	</footer>
+	<script src="{{ static_url("js/jquery-1.11.0.min.js") }}"></script>
+	<script src="{{ static_url("js/app.js") }}"></script>
+</body>
+</html>
