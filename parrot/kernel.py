@@ -1,4 +1,4 @@
-import logging
+from logger import log
 
 
 class Kernel:
@@ -6,5 +6,5 @@ class Kernel:
 		pass
 
 	def handle_input(self, string):
-		logging.info(string)
+		log.info(string)
 		return string + "woo"

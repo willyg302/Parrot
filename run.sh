@@ -1,1 +1,1 @@
-tornado/bin/python app.py
+tornado/bin/python parrot/app.py

@@ -5,7 +5,7 @@ from subprocess import call
 DIRNAME = os.path.abspath(os.path.dirname(__file__))
 ENV = 'tornado'
 REQUIREMENTS = 'requirements.txt'
-TOKENS_FILE = 'tokens.py'
+TOKENS_FILE = os.path.join('parrot', 'tokens.py')
 
 script_dir = '\\Scripts\\' if platform.system() == 'Windows' else '/bin/'
 

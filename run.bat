@@ -1,1 +1,1 @@
-tornado\Scripts\python.exe app.py
+tornado\Scripts\python.exe parrot\app.py

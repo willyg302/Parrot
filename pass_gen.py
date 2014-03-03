@@ -1,5 +1,5 @@
 import hashlib
-import tokens
+from parrot import tokens
 
 def sha(data):
 	return hashlib.sha256(repr(data) + tokens.COOKIE_SECRET).hexdigest()

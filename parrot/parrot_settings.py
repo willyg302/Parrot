@@ -5,9 +5,9 @@ _dirname = os.path.dirname(__file__)
 
 # Actual exposed settings (style rule: all caps)
 DEBUG = True
-STATIC_PATH = os.path.join(_dirname, 'static')
-TEMPLATE_PATH = os.path.join(_dirname, 'templates')
-LOG_PATH = os.path.join(_dirname, 'logs')
+STATIC_PATH = os.path.join(_dirname, '..', 'static')
+TEMPLATE_PATH = os.path.join(_dirname, '..', 'templates')
+LOG_PATH = os.path.join(_dirname, '..', 'logs')
 
 MAX_WAIT_SECONDS_BEFORE_SHUTDOWN = 3
 
