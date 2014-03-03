@@ -1,4 +1,4 @@
-from log import parrot_log
+import logging
 
 
 class Kernel:
@@ -6,5 +6,5 @@ class Kernel:
 		pass
 
 	def handle_input(self, string):
-		parrot_log.info(string)
+		logging.info(string)
 		return string + "woo"

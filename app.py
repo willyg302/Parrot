@@ -1,6 +1,8 @@
+import os
 import hashlib
 import signal
 import time
+import logging
 
 from tornado import escape, httpserver, ioloop, web
 from tornado.options import define, options, parse_command_line
@@ -8,7 +10,6 @@ from tornado.options import define, options, parse_command_line
 import parrot_settings
 import tokens
 from kernel import Kernel
-from log import parrot_log
 
 
 # Tornado settings (we default to run on port 8888)
@@ -112,31 +113,41 @@ class LoginHandler(BaseHandler):
 	def post(self):
 		username = self.get_argument('username', '')
 		password = self.get_argument('password', '')
-		parrot_log.info("User {0} logging in with password {1}".format(username, password))
 		if self.check_permission(username, password):
+			logging.info('User {} logging in with password {}'.format(username, password))
 			self.set_current_user(username)
 			self.redirect(self.get_argument('next', u'/'))
 		else:
-			error_msg = u"?error=" + escape.url_escape("Login incorrect")
+			logging.warning('Login failed for user {} with password {}'.format(username, password))
+			error_msg = u"?error=" + escape.url_escape('Login incorrect')
 			self.redirect(u"/login" + error_msg)
 
 	def set_current_user(self, user):
 		if user:
-			self.set_secure_cookie("parrot_user", user)
+			self.set_secure_cookie('parrot_user', user)
 		else:
-			self.clear_cookie("parrot_user")
+			self.clear_cookie('parrot_user')
 
 
 class LogoutHandler(BaseHandler):
 
 	def get(self):
+		username = escape.xhtml_escape(self.current_user)
+		logging.info('User {} logging out'.format(username))
 		self.clear_cookie('parrot_user')
 		self.redirect(self.get_argument('next', '/'))
 
 
+def initialize_logging():
+	if not os.path.exists(parrot_settings.LOG_PATH):
+		os.makedirs(parrot_settings.LOG_PATH)
+	logging.getLogger('tornado.access').setLevel(logging.WARNING)  # Suppress standard GET/POST
+	setattr(options, 'log_file_prefix', os.path.join(parrot_settings.LOG_PATH, 'parrot.log'))
+
+
 # Logic if the app is being invoked directly
 def main():
-	#options['log_file_prefix'].set('logs/parrot1.log')  # Does not work
+	initialize_logging()
 	parse_command_line()
 
 	global http_server
@@ -150,5 +161,5 @@ def main():
 	ioloop.IOLoop.instance().start()
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
 	main()
