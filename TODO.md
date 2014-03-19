@@ -11,7 +11,7 @@ The Kernel should be frontend-agnostic. It is essentially an I/O machine: it tak
 
 Everything should be piped through `handle_input()`.
 
-One should thnk of the user input as a shell command. For example, if the user wanted to track the hashtag #obama on Facebook and Twitter, they could do something like:
+One should think of the user input as a shell command. For example, if the user wanted to track the hashtag #obama on Facebook and Twitter, they could do something like:
 
 ```
 track #obama --facebook --twitter
