@@ -22,7 +22,7 @@ class Command:
 
 	@classmethod
 	def list(self):
-		ret = 'Available commands:\n'
+		ret = '<b>Unrecognized command!</b>\n\nAvailable commands:\n'
 		for f, short_doc in zip(Command.registry, Command.short_docs):
 			ret += '  {}{}\n'.format(f, (" : " + short_doc) if short_doc else '')
 		return ret
@@ -35,13 +35,28 @@ class Kernel:
 	@Command('Test function to make sure everything works')
 	def test(self, args):
 		"""
-		Usage: odd_even_example.py [-h | --help] (ODD EVEN)...
+		Usage: test [-h | --help] (ODD EVEN)...
 
 		Example, try:
-		  odd_even_example.py 1 2 3 4
+		  test 1 2 3 4
 
 		Options:
 		  -h, --help
+		"""
+		return str(args)
+
+	@Command('Track a given keyword')
+	def track(self, args):
+		"""
+		Usage:
+		  track [-fty] <keyword>
+		  track -h | --help
+
+		Options:
+		  -h --help      Show this help message.
+		  -f --facebook  Track keyword on Facebook.
+		  -t --twitter   Track keyword on Twitter.
+		  -y --youtube   Track keyword on YouTube.
 		"""
 		return str(args)
 
