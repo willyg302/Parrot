@@ -5,7 +5,7 @@ $('#omnibar').submit(function(event) {
 		data: $('#search').val()
 	});
 	post.done(function(data) {
-		$('#prompt').text(data);
+		$('#prompt').html(data);
 		$('#search').val('');
 	});
 });
