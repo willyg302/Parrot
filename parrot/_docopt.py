@@ -10,6 +10,7 @@
 """
 import sys
 import re
+import textwrap
 
 
 __all__ = ['docopt']
@@ -477,7 +478,7 @@ def formal_usage(section):
 # Returns None if no extra was handled
 def extras(help, version, options, doc):
     if help and any((o.name in ('-h', '--help')) and o.value for o in options):
-        return doc.strip('\n')
+        return textwrap.dedent(doc.strip('\n'))
     if version and any(o.name == '--version' and o.value for o in options):
         return version
     return None

@@ -22,7 +22,7 @@ class Command:
 
 	@classmethod
 	def list(self):
-		ret = '<b>Unrecognized command!</b>\n\nAvailable commands:\n'
+		ret = '<span style="color: red;"><b>Unrecognized command!</b></span>\n\nAvailable commands:\n'
 		for f, short_doc in zip(Command.registry, Command.short_docs):
 			ret += '  {}{}\n'.format(f, (" : " + short_doc) if short_doc else '')
 		return ret
@@ -69,4 +69,4 @@ class Kernel:
 	def handle_input(self, string):
 		log.info('Servicing request: {}'.format(string))
 		raw_cmd = shlex.split(string)
-		return str(self.runCommand(raw_cmd[0], raw_cmd[1:])).replace('\n', '<br>').replace(' ', '&nbsp;')
+		return self.runCommand(raw_cmd[0], raw_cmd[1:])
