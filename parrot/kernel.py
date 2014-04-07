@@ -2,6 +2,7 @@ import shlex
 
 from tornado.template import Template
 
+import parrot_settings
 from logger import log
 from _docopt import docopt
 
@@ -9,7 +10,7 @@ from _docopt import docopt
 list_html = """<b style="color: red;">Unrecognized command "{{ unrecognized }}"</b>
 
 Available commands:
-{% for f, short_doc in commands %}  {{ f }}{% if short_doc %}: {{ short_doc }}{% end %}
+{% for f, short_doc in commands %}  <b>{{ '{: <10}'.format(f) }}</b>{% if short_doc %}{{ short_doc }}{% end %}
 {% end %}
 """
 
@@ -21,14 +22,14 @@ Need help?
 
 
 class Command:
-	registry = {}
+	registry = []
 	short_docs = []
 
 	def __init__(self, doc=None):
 		Command.short_docs.append(doc)
 
 	def __call__(self, f):
-		Command.registry[f.func_name] = f
+		Command.registry.append(f.func_name)
 		def wrapped_f(self, args):
 			arguments = docopt(f.__doc__, argv=args)
 			if not arguments:
@@ -45,6 +46,33 @@ class Kernel:
 	def __init__(self):
 		pass
 
+	# From Twitterator: ['Add user', 'Create database', 'Export', 'Search', 'Track keyword', 'Track user'];
+
+	@Command('Search for a given keyword')
+	def search(self, args):
+		"""
+		Usage:
+		  search [-fty] <keyword>
+		  search -h | --help
+
+		Options:
+		  -h --help      Show this help message.
+		  -f --facebook  Search for keyword on Facebook.
+		  -t --twitter   Search for keyword on Twitter.
+		  -y --youtube   Search for keyword on YouTube.
+		"""
+
+		# Example args information:
+		# {'--facebook': False,
+		# '--help': False,
+		# '--twitter': True,
+		# '--youtube': False,
+		# '': 'f'}
+
+
+
+		return str(args)
+
 	@Command('Test function to make sure everything works')
 	def test(self, args):
 		"""
@@ -54,7 +82,7 @@ class Kernel:
 		  test 1 2 3 4
 
 		Options:
-		  -h, --help
+		  -h --help      Show this help message.
 		"""
 		return str(args)
 

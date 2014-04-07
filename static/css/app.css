@@ -19,6 +19,10 @@ a:hover {
 	color: #4772a3;
 }
 
+ul {
+	margin: 0;
+}
+
 
 /* LAYOUT */
 
@@ -55,6 +59,7 @@ footer {
 	color: #999999;
 	font-weight: 300;
 	font-size: 22px;
+	font-family: "Courier New", Courier, monospace;
 	margin: 0;
 	white-space: pre;
 }
