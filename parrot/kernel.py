@@ -1,7 +1,23 @@
 import shlex
 
+from tornado.template import Template
+
 from logger import log
 from _docopt import docopt
+
+
+list_html = """<b style="color: red;">Unrecognized command "{{ unrecognized }}"</b>
+
+Available commands:
+{% for f, short_doc in commands %}  {{ f }}{% if short_doc %}: {{ short_doc }}{% end %}
+{% end %}
+"""
+
+malformed_html = """<b style="color: red;">Parrot could not understand your input "{{ command }} {{ args }}"</b>
+
+Need help?
+<ul><li>Type "{{ command }} -h"</li><li>Visit the <a href="/help">Help page</a></li></ul>
+"""
 
 
 class Command:
@@ -16,16 +32,13 @@ class Command:
 		def wrapped_f(self, args):
 			arguments = docopt(f.__doc__, argv=args)
 			if not arguments:
-				return 'Argument error!'
+				return Template(malformed_html).generate(command=f.func_name, args=' '.join(args))
 			return f(self, arguments)
 		return wrapped_f
 
 	@classmethod
-	def list(self):
-		ret = '<span style="color: red;"><b>Unrecognized command!</b></span>\n\nAvailable commands:\n'
-		for f, short_doc in zip(Command.registry, Command.short_docs):
-			ret += '  {}{}\n'.format(f, (" : " + short_doc) if short_doc else '')
-		return ret
+	def list(self, unrecognized):
+		return Template(list_html).generate(unrecognized=unrecognized, commands=zip(Command.registry, Command.short_docs))
 
 
 class Kernel:
@@ -64,7 +77,7 @@ class Kernel:
 		c = self.__class__
 		if hasattr(c, command) and callable(getattr(c, command)):
 			return getattr(c, command)(self, args)
-		return Command.list()  # Unrecognized command, show list of known commands
+		return Command.list(command)  # Unrecognized command, show list of known commands
 
 	def handle_input(self, string):
 		log.info('Servicing request: {}'.format(string))
