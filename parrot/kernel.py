@@ -1,6 +1,9 @@
+#import os
 import shlex
 
 from tornado.template import Template
+
+#from pattern.db import Database
 
 import parrot_settings
 from logger import log
@@ -41,6 +44,22 @@ class Command:
 	def list(self, unrecognized):
 		return Template(list_html).generate(unrecognized=unrecognized, commands=zip(Command.registry, Command.short_docs))
 
+'''
+class DB:
+
+	def __init__(self, name):
+		dbpath = os.path.join(parrot_settings.DB_PATH, '{}.db'.format(name))
+		self.db = Database(dbpath)
+
+		# Test tweets table schema
+		if not 'tweets' in self.db:
+			schema = (
+				pk(),  # Auto-incremental id
+				field('tweet', STRING(140))
+				field('author', STRING(60))    
+			)
+			self.db.create('tweets', schema)
+'''
 
 class Kernel:
 	def __init__(self):
@@ -68,7 +87,8 @@ class Kernel:
 		# '--twitter': True,
 		# '--youtube': False,
 		# '': 'f'}
-
+		
+		#db = DB('test')
 
 
 		return str(args)

@@ -47,10 +47,10 @@ You can create a new user by simply adding them to the dictionary. To get the pa
 Usage
 -----
 
-Execute `run.bat` on Windows or `sh run.sh` on UNIX to start the server.
+1. Start the MongoDB daemon with `mongod`
+2. Execute `run.bat` on Windows or `sh run.sh` on UNIX to start the server
 
 Credits
 -------
 
-* __Python for Facebook__: [Facebook Python SDK](https://github.com/pythonforfacebook/facebook-sdk)
-* __Ryan McGrath__: [Twython](https://github.com/ryanmcgrath/twython)
+* **CLiPS**: [Pattern](https://github.com/clips/pattern)
