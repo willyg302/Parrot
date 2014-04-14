@@ -16,9 +16,6 @@ from logger import log
 define('port', default=8888, help="The port to run Parrot on", type=int)
 
 
-kernel = Kernel()
-
-
 # Handle signals from the shell (or kill -9's)
 def sig_handler(sig, frame):
 	ioloop.IOLoop.instance().add_callback(shutdown)
@@ -143,8 +140,10 @@ def main():
 	logger.initialize_logging()
 	parse_command_line()
 
-	global http_server
+	global kernel
+	kernel = Kernel()
 
+	global http_server
 	http_server = httpserver.HTTPServer(Application())
 	http_server.listen(options.port)
 

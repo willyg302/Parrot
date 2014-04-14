@@ -1,13 +1,12 @@
-#import os
 import shlex
 
 from tornado.template import Template
 
-#from pattern.db import Database
+from pattern.web import Twitter, hashtags
 
-import parrot_settings
 from logger import log
 from _docopt import docopt
+from database import DB
 
 
 list_html = """<b style="color: red;">Unrecognized command "{{ unrecognized }}"</b>
@@ -44,26 +43,11 @@ class Command:
 	def list(self, unrecognized):
 		return Template(list_html).generate(unrecognized=unrecognized, commands=zip(Command.registry, Command.short_docs))
 
-'''
-class DB:
-
-	def __init__(self, name):
-		dbpath = os.path.join(parrot_settings.DB_PATH, '{}.db'.format(name))
-		self.db = Database(dbpath)
-
-		# Test tweets table schema
-		if not 'tweets' in self.db:
-			schema = (
-				pk(),  # Auto-incremental id
-				field('tweet', STRING(140))
-				field('author', STRING(60))    
-			)
-			self.db.create('tweets', schema)
-'''
 
 class Kernel:
+
 	def __init__(self):
-		pass
+		self.db = DB()
 
 	# From Twitterator: ['Add user', 'Create database', 'Export', 'Search', 'Track keyword', 'Track user'];
 
@@ -87,11 +71,19 @@ class Kernel:
 		# '--twitter': True,
 		# '--youtube': False,
 		# '': 'f'}
-		
-		#db = DB('test')
 
+		engine = Twitter(language='en')
+		ret = []
 
-		return str(args)
+		for tweet in engine.search('is cooler than', count=25, cached=False):
+			ret.append({
+				'text': tweet.text,
+				'author': tweet.author,
+				'date': tweet.date,
+				'hashtags': hashtags(tweet.text)
+			})
+
+		return str(ret)
 
 	@Command('Test function to make sure everything works')
 	def test(self, args):

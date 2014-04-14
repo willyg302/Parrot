@@ -1,4 +1,6 @@
-# Parrot
+![Parrot](https://rawgit.com/willyg302/Parrot/master/static/img/logo.svg "RRRAWWK!")
+
+---
 
 A social media data collection framework.
 
