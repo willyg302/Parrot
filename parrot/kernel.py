@@ -75,6 +75,17 @@ class Kernel:
 		engine = Twitter(language='en')
 		ret = []
 
+		'''
+		generator = ({
+			'text': tweet.text,
+			'author': tweet.author,
+			'date': tweet.date,
+			'hashtags': hashtags(tweet.text)
+		} for tweet in engine.search('is cooler than', count=25, cached=False))
+
+		self.db.bulk_insert('test', generator)
+		'''
+		
 		for tweet in engine.search('is cooler than', count=25, cached=False):
 			ret.append({
 				'text': tweet.text,
@@ -82,6 +93,7 @@ class Kernel:
 				'date': tweet.date,
 				'hashtags': hashtags(tweet.text)
 			})
+		
 
 		return str(ret)
 
