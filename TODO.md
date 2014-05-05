@@ -1,9 +1,9 @@
-Besides everything marked `@TODO` in any source file. **Note**: completed tasks are marked with a ✔.
+Besides everything marked `@TODO` in any source file.
 
-- ✔ Configure logging to file as well as console
-- ☐ Configure automatic MongoDB startup
-- ☐ `motor` integration
-- ☐ Kernel system (see "Kernel" below)
+- [x] Configure logging to file as well as console
+- [ ] Configure automatic MongoDB startup
+- [ ] `motor` integration
+- [ ] Kernel system (see "Kernel" below)
 
 ## Kernel
 
