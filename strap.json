@@ -1,0 +1,19 @@
+{
+	"project": "Parrot",
+	"tasks": [
+		{
+			"name": "Install Parrot",
+			"virtualenv": "tornado",
+			"requirements": [
+				"easy_install greenlet",
+				"pip install motor",
+				"pip install pattern"
+			],
+			"freeze": "requirements.txt"
+		},
+		{
+			"name": "Initialize tokens file",
+			"requirements": ["python setup-tokens.py"]
+		}
+	]
+}
