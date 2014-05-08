@@ -1,8 +1,6 @@
 import os
 
-
 TOKENS_FILE = os.path.join('parrot', 'tokens.py')
-
 
 # Set up a tokens.py file if it does not already exist
 def init_tokens_file():
@@ -16,5 +14,22 @@ def init_tokens_file():
 			f.write('TW_OAUTH_TOKEN = ""\n')
 			f.write('TW_OAUTH_SECRET = ""\n')
 
-if __name__ == '__main__':
-	init_tokens_file()
+config = {
+	'project': 'Parrot',
+	'tasks': {
+		'install': {
+			'name': 'Install Parrot',
+			'virtualenv': 'tornado',
+			'run': [
+				'easy_install greenlet',
+				'pip install motor',
+				'pip install pattern',
+				init_tokens_file
+			],
+			'freeze': 'requirements.txt'
+		},
+		'default': {
+			'run': ['install']
+		}
+	}
+}
