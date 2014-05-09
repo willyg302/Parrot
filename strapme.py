@@ -28,8 +28,13 @@ config = {
 			],
 			'freeze': 'requirements.txt'
 		},
+		'server': {
+			'name': 'Start Parrot server',
+			'virtualenv': 'tornado',
+			'run': ['python parrot']
+		},
 		'default': {
-			'run': ['install']
+			'run': ['server']
 		}
 	}
 }

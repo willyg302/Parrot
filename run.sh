@@ -1,1 +1,0 @@
-tornado/bin/python parrot/app.py

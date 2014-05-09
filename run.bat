@@ -1,1 +1,0 @@
-tornado\Scripts\python.exe parrot\app.py
