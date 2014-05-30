@@ -15,7 +15,7 @@ A social media data collection framework.
 3. Grab Parrot!
 
    ```
-   strap gh:willyg302/Parrot Parrot
+   strap init gh:willyg302/Parrot -d Parrot
    ```
 
 And that's it! ...Okay not really. The next step is to set up proper authorization for Parrot (OAuth, secret keys, cookies, and all that good stuff).
