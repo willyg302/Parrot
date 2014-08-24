@@ -1,4 +1,4 @@
-![Parrot](https://rawgit.com/willyg302/Parrot/master/static/img/logo.svg "RRRAWWK!")
+![Parrot](https://raw.github.com/willyg302/Parrot/master/Parrot-logo-922.png "RRRAWWK!")
 
 ---
 
@@ -6,7 +6,7 @@ A social media data collection framework.
 
 ## Setup
 
-> **Note**: All instructions below, unless otherwise stated, assume a UNIX environment. Depending on your privileges you may need to `sudo` things or be logged in as an administrator on Windows. You should also be in the Parrot/ directory to start off.
+> **Note**: All instructions below, unless otherwise stated, assume a UNIX environment. Depending on your privileges you may need to `sudo` things or be logged in as an administrator on Windows.
 
 1. Get [Python](http://www.python.org/) (we use 2.7)
 
@@ -44,7 +44,7 @@ By default, Parrot is password-protected by a login page. This is to prevent ran
 
 Parrot defines a set of known users as a Python dictionary called `USER_DICT` in `parrot_settings.py`. The key is the username, and the value is a salted sha256 of the corresponding password. There are a few users defined already but they probably won't be of much use to you, so delete them all.
 
-You can create a new user by simply adding them to the dictionary. To get the password, run `python pass_gen.py` and enter a password at the prompt. The program will spit out the salted pass that you can then put into `USER_DICT`.
+You can create a new user by simply adding them to the dictionary. To get the password, run `strap run pass_gen` and enter a password at the prompt. The program will spit out the salted pass that you can then put into `USER_DICT`.
 
 Usage
 -----
